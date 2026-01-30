@@ -3,7 +3,7 @@
 // Sustituye los valores por las credenciales reales del entorno.
 return [
     'db_host' => 'localhost',
-    'db_name' => 'consultoria',    // TODO: ajusta al nombre real de la BD
+    'db_name' => 'consulting',    // BD definida en sql/Consulting.sql
     'db_user' => 'root',
     'db_pass' => '',
 
@@ -17,10 +17,10 @@ return [
     // Deja en null si aún no conoces el id para evitar errores de FK;
     // el registro se guardará con id_servicio NULL.
     'service_ids' => [
-        'Desarrollo Web' => null,
-        'Implementación RPA' => null,
-        'Asistencia App Móviles' => null,
-        'Control y gestión BD' => null,
-        'Fix developer' => null,
+        'Desarrollo Web' => 1,
+        'Implementación RPA' => 2,
+        'Asistencia App Móviles' => 3,
+        'Control y gestión BD' => 4,
+        'Fix developer' => 5,
     ],
 ];

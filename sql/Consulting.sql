@@ -1,5 +1,5 @@
 -- ============================================================
--- Base de datos: consultoria_tecnologia
+-- Base de datos: consulting
 -- Motor: MySQL 8.x (InnoDB)
 -- Status: 1 = Activo, 0 = Inactivo
 -- ============================================================
@@ -111,7 +111,7 @@ CREATE TABLE clientes_potenciales (
 ) ENGINE=InnoDB;
 
 -- ============================================================
--- INSERTS (5 registros por tabla)
+-- INSERTS (registros de ejemplo)
 -- ============================================================
 
 -- CATEGORIA (5)
@@ -141,29 +141,40 @@ INSERT INTO servicios (nombre, descripcion, costo, referencia, calificacion, id_
  'Asistente de programación para empresas y estudiantes; debugging y guía técnica.',
  15000.00, 'FIXDEV-ASST', 4.80, 5, 1);
 
--- CLIENTES REGISTRADOS (5)
+-- CLIENTES REGISTRADOS (8)
 -- password_hash: ejemplo (NO guardar contraseñas en texto plano)
 INSERT INTO clientes_registrados (nombre, password_hash, direccion, telefono, mail, pagina_web, nivel, status) VALUES
 ('Grupo Nébula SA de CV', '$2y$10$EXAMPLEhashNebula', 'Av. Reforma 100, CDMX', '5551002001', 'contacto@nebula.mx', 'https://nebula.mx', 'EMPRESA', 1),
 ('Comercializadora Atlas', '$2y$10$EXAMPLEhashAtlas', 'Calle 5 #123, Guadalajara', '3332001122', 'it@atlas.com.mx', 'https://atlas.com.mx', 'PRO', 1),
 ('Innova Labs', '$2y$10$EXAMPLEhashInnova', 'Parque Tecnológico 77, Monterrey', '8189007788', 'admin@innovalabs.io', 'https://innovalabs.io', 'EMPRESA', 1),
 ('Café Aurora', '$2y$10$EXAMPLEhashAurora', 'Centro 45, Puebla', '2224567890', 'dueño@cafeaurora.mx', 'https://cafeaurora.mx', 'BASICO', 1),
-('Estudio Pixel', '$2y$10$EXAMPLEhashPixel', 'Col. Roma, CDMX', '5559876543', 'hola@estudiopixel.mx', 'https://estudiopixel.mx', 'PRO', 0);
+('Estudio Pixel', '$2y$10$EXAMPLEhashPixel', 'Col. Roma, CDMX', '5559876543', 'hola@estudiopixel.mx', 'https://estudiopixel.mx', 'PRO', 0),
+('Finanzas Delta', '$2y$10$EXAMPLEhashDelta', 'Av. Insurgentes 200, CDMX', '5554432100', 'finanzas@delta.mx', 'https://delta.mx', 'PRO', 1),
+('HealthNext Clinics', '$2y$10$EXAMPLEhashHealth', 'Circuito Médico 88, Querétaro', '4421012020', 'tech@healthnext.mx', 'https://healthnext.mx', 'EMPRESA', 1),
+('LogiFast Express', '$2y$10$EXAMPLEhashLogi', 'Parque Industrial 12, Toluca', '7229988776', 'ops@logifast.mx', 'https://logifast.mx', 'BASICO', 1);
 
--- SERVICIOS CONTRATADOS (5)
+-- SERVICIOS CONTRATADOS (10)
 -- id_servicio (1..5) y id_cliente_reg (1..5)
 INSERT INTO servicios_contratados (id_servicio, id_cliente_reg, fecha_inicio, fecha_final, descripcion, status) VALUES
 (1, 1, '2026-01-05', '2026-03-05', 'Desarrollo de portal web corporativo + API de catálogo.', 1),
 (4, 2, '2026-01-10', NULL, 'Administración MySQL: optimización de consultas y plan de respaldos.', 1),
 (2, 3, '2026-01-15', '2026-02-15', 'Automatización RPA para facturación y conciliación básica.', 1),
 (3, 4, '2026-01-20', '2026-02-20', 'Soporte app móvil: corrección de bugs y publicación en tiendas.', 1),
-(5, 5, '2026-01-22', '2026-01-30', 'Fix Developer: soporte intensivo para cierre de sprint (cliente inactivo).', 0);
+(5, 5, '2026-01-22', '2026-01-30', 'Fix Developer: soporte intensivo para cierre de sprint (cliente inactivo).', 0),
+(2, 6, '2026-02-01', NULL, 'RPA para cierres contables y validación fiscal.', 1),
+(4, 7, '2026-02-02', NULL, 'PostgreSQL HA, backups verificados y monitoreo proactivo.', 1),
+(5, 7, '2026-02-10', '2026-02-20', 'FixDeveloper: estabilización de API clínica y manejo de errores.', 1),
+(1, 6, '2026-02-15', NULL, 'Landing y calculadora de productos financieros.', 1),
+(3, 8, '2026-02-05', NULL, 'Soporte a app logística: tracking en tiempo real y releases.', 1);
 
--- CLIENTES POTENCIALES (5)
+-- CLIENTES POTENCIALES (8)
 -- id_servicio apunta a servicios (1..5); puede ser NULL si aún no decide
 INSERT INTO clientes_potenciales (nombre, correo, telefono, id_servicio, status) VALUES
 ('Logística Boreal', 'contacto@boreal-log.com', '5540010020', 2, 1),
 ('Clínica San Miguel', 'direccion@sanmiguel.clinic', '3311122233', 4, 1),
 ('Startup Lumen', 'ceo@lumenstartup.io', '8180101010', 1, 1),
 ('Universidad Horizonte', 'proyectos@horizonte.edu.mx', '2221010101', 5, 1),
-('Tienda Nova', 'ventas@tiendanova.mx', '5552223344', NULL, 0);
+('Tienda Nova', 'ventas@tiendanova.mx', '5552223344', NULL, 0),
+('Mercurio Retail', 'cto@mercurio-retail.mx', '5554443322', 1, 1),
+('AeroCargo', 'it@aerocargo.mx', '5580010010', 2, 1),
+('GreenBank', 'tecnologia@greenbank.mx', '5566677788', 4, 1);
