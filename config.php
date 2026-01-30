@@ -12,6 +12,10 @@ return [
     'mail_from_name' => 'Consultoría Estratégica TI',
     // Opcional: copia interna para seguimiento comercial.
     'mail_bcc' => 'ventas@consultoria-ti.mx',
+    // Credenciales maestras para habilitar el alta de clientes.
+    'master_phrase' => 'ojos',
+    'master_key' => '2812',
+    'master_key_extra' => '9X-Alpha',
 
     // Mapea los servicios con el id_servicio real en la tabla servicios.
     // Deja en null si aún no conoces el id para evitar errores de FK;

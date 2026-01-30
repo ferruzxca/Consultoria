@@ -2,7 +2,7 @@
 // Procesa la solicitud de agenda, guarda en clientes_potenciales y envía confirmación.
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: index.html#agenda');
+    header('Location: agenda.html');
     exit;
 }
 
@@ -15,7 +15,7 @@ function respond(string $message, bool $ok = false): void {
     <style>body{font-family:Arial, sans-serif;background:#0c1018;color:#e7edf7;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;}
     .box{max-width:520px;background:#0f1724;border:1px solid #1f2b3d;border-radius:14px;padding:22px;box-shadow:0 20px 40px rgba(0,0,0,0.45);}
     h1{margin:0 0 12px;font-size:22px;}p{margin:0 0 14px;color:#c7d5e5;}a{color:#00c2ff;text-decoration:none;font-weight:700;}</style></head><body>
-    <div class=\"box\"><h1 style=\"color:{$color};\">{$title}</h1><p>{$message}</p><a href=\"index.html#agenda\">Regresar</a></div></body></html>";
+    <div class=\"box\"><h1 style=\"color:{$color};\">{$title}</h1><p>{$message}</p><a href=\"agenda.html\">Regresar</a></div></body></html>";
     exit;
 }
 

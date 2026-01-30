@@ -193,28 +193,34 @@
     section p.lead { color: var(--muted); margin: 0 0 24px; max-width: 720px; }
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
     }
     .card {
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 18px;
+      border-radius: 18px;
+      padding: 22px;
       box-shadow: var(--shadow);
       display: grid;
-      gap: 10px;
+      gap: 12px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.25s ease, border 0.25s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.5);
     }
     .card::after {
       content: '';
       position: absolute;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, rgba(0, 194, 255, 0.16), transparent 60%);
-      top: -30px;
-      right: -40px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(0, 194, 255, 0.2), transparent 62%);
+      top: -40px;
+      right: -50px;
       transform: rotate(18deg);
       pointer-events: none;
     }
@@ -253,13 +259,13 @@
     .list .item i { color: var(--accent); }
     .portal {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 22px;
     }
     .two-up {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 22px;
       align-items: start;
     }
     .alert {
@@ -389,8 +395,8 @@
     }
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
     }
     .feature-card {
       background: var(--card);
@@ -399,7 +405,9 @@
       padding: 16px;
       display: grid;
       gap: 8px;
+      transition: transform 0.25s ease, border 0.25s ease;
     }
+    .feature-card:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.16); }
     .feature-card h3 { margin: 0; }
     .feature-card p { margin: 0; color: var(--muted); }
     .feature-card .tag { font-size: 12px; color: var(--accent); font-weight: 700; }
@@ -422,8 +430,8 @@
     .timeline-step .body { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
     }
     .price-card {
       background: rgba(255, 255, 255, 0.02);
@@ -434,7 +442,9 @@
       gap: 8px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.25s ease, border 0.25s ease;
     }
+    .price-card:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.16); }
     .price-card .price { font-size: 26px; font-weight: 800; }
     .price-card ul { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 6px; }
     .badge {
@@ -460,10 +470,18 @@
       gap: 10px;
       box-shadow: var(--shadow);
     }
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(12, 16, 24, 0.8);
+      margin-top: 10px;
+    }
     .table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 10px;
+      margin: 0;
     }
     .table th, .table td {
       padding: 10px 12px;
@@ -488,11 +506,13 @@
       border-radius: 14px;
       display: grid;
       gap: 4px;
+      transition: transform 0.25s ease, border 0.25s ease;
     }
+    .kpi:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.16); }
     .chart-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
       margin-top: 16px;
     }
     .chart-card {
@@ -501,7 +521,9 @@
       border-radius: 16px;
       padding: 14px;
       box-shadow: var(--shadow);
+      transition: transform 0.25s ease, border 0.25s ease;
     }
+    .chart-card:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.16); }
     .chart-card h3 { margin: 0 0 10px; }
     .chips { display: flex; gap: 8px; flex-wrap: wrap; }
     .chip {
@@ -512,6 +534,22 @@
       font-size: 12px;
       color: var(--muted);
       font-weight: 700;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px) scale(0.99);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
     }
     @media (max-width: 640px) {
       nav { padding: 12px 16px; }

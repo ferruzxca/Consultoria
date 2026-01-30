@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['cliente'])) {
+    header('Location: portal.html');
+    exit;
+}
+
+$clientSession = $_SESSION['cliente'];
 $config = include __DIR__ . '/config.php';
 
 $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', $config['db_host'], $config['db_name']);
@@ -112,12 +120,15 @@ $monthlyTotals  = array_map(fn($m) => (float) $m['total'], $monthly);
         </div>
       </div>
       <div class="nav-links">
-        <a href="index.html#servicios">Inicio</a>
-        <a href="servicio-rpa.html">RPA</a>
-        <a href="servicio-bd.html">Soporte BD</a>
-        <a href="servicio-fixdeveloper.html">FixDeveloper</a>
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="sectores.html">Sectores</a>
+        <a href="metodo.html">Enfoque</a>
+        <a href="portal.html">Portal</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="contacto.html">Contacto</a>
         <a href="dashboard.php">Dashboard</a>
-        <a class="btn" href="index.html#agenda"><i class="fa-solid fa-calendar-check"></i>Agenda</a>
+        <a class="btn" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i>Salir</a>
       </div>
     </nav>
   </header>
@@ -126,6 +137,9 @@ $monthlyTotals  = array_map(fn($m) => (float) $m['total'], $monthly);
     <section>
       <h2>Dashboard de clientes y servicios</h2>
       <p class="lead">Visibilidad de clientes registrados, servicios contratados y valor activo.</p>
+      <div class="alert" style="margin-bottom:14px;">
+        <i class="fa-solid fa-user-check"></i> Sesión activa: <?php echo htmlspecialchars($clientSession['nombre']); ?> (<?php echo htmlspecialchars($clientSession['nivel']); ?>)
+      </div>
       <?php if ($error): ?>
         <div class="alert" style="margin-bottom:14px; border-color: rgba(255, 123, 123, 0.45); background: rgba(255, 123, 123, 0.12);">
           <i class="fa-solid fa-triangle-exclamation"></i> <?php echo htmlspecialchars($error); ?>
@@ -153,34 +167,36 @@ $monthlyTotals  = array_map(fn($m) => (float) $m['total'], $monthly);
 
     <section>
       <h2>Clientes registrados</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Cliente</th>
-            <th>Nivel</th>
-            <th>Servicios</th>
-            <th>Valor activo</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($clients as $c): ?>
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
             <tr>
-              <td><?php echo htmlspecialchars($c['nombre']); ?><br><span class="helper"><?php echo htmlspecialchars($c['mail'] ?? ''); ?></span></td>
-              <td><?php echo htmlspecialchars($c['nivel']); ?></td>
-              <td><?php echo (int)$c['servicios']; ?></td>
-              <td>$<?php echo number_format((float)$c['valor_activo'], 0); ?></td>
-              <td>
-                <?php if ((int)$c['status'] === 1): ?>
-                  <span class="badge success">Activo</span>
-                <?php else: ?>
-                  <span class="badge danger">Inactivo</span>
-                <?php endif; ?>
-              </td>
+              <th>Cliente</th>
+              <th>Nivel</th>
+              <th>Servicios</th>
+              <th>Valor activo</th>
+              <th>Estado</th>
             </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <?php foreach ($clients as $c): ?>
+              <tr>
+                <td><?php echo htmlspecialchars($c['nombre']); ?><br><span class="helper"><?php echo htmlspecialchars($c['mail'] ?? ''); ?></span></td>
+                <td><?php echo htmlspecialchars($c['nivel']); ?></td>
+                <td><?php echo (int)$c['servicios']; ?></td>
+                <td>$<?php echo number_format((float)$c['valor_activo'], 0); ?></td>
+                <td>
+                  <?php if ((int)$c['status'] === 1): ?>
+                    <span class="badge success">Activo</span>
+                  <?php else: ?>
+                    <span class="badge danger">Inactivo</span>
+                  <?php endif; ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section>
@@ -203,26 +219,28 @@ $monthlyTotals  = array_map(fn($m) => (float) $m['total'], $monthly);
 
     <section>
       <h2>Resumen por servicio</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Servicio</th>
-            <th>Contratos</th>
-            <th>Activos</th>
-            <th>Valor activo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($services as $s): ?>
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
             <tr>
-              <td><?php echo htmlspecialchars($s['nombre']); ?></td>
-              <td><?php echo (int)$s['contratos']; ?></td>
-              <td><?php echo (int)$s['activos']; ?></td>
-              <td>$<?php echo number_format((float)$s['valor_activo'], 0); ?></td>
+              <th>Servicio</th>
+              <th>Contratos</th>
+              <th>Activos</th>
+              <th>Valor activo</th>
             </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <?php foreach ($services as $s): ?>
+              <tr>
+                <td><?php echo htmlspecialchars($s['nombre']); ?></td>
+                <td><?php echo (int)$s['contratos']; ?></td>
+                <td><?php echo (int)$s['activos']; ?></td>
+                <td>$<?php echo number_format((float)$s['valor_activo'], 0); ?></td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
     </section>
   </main>
 
@@ -293,5 +311,6 @@ $monthlyTotals  = array_map(fn($m) => (float) $m['total'], $monthly);
       }
     });
   </script>
+  <script src="app.js"></script>
 </body>
 </html>
